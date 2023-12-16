@@ -1,15 +1,29 @@
-# The comment remover
-the comment remover of source code files, using finite-state machine (FSM).
+# rmcmt(1) -- remove comments
 
-## Build
-Run `make` within the project directory to build the project.
+## SYNOPSIS
 ```bash
-make
+rmcmt  # no options, no args
 ```
 
-## Usage
-Input is read from `stdin` and output is written to `stdout`.
+## DESCRIPTION
+Remove comments.
+Read from standard input, and write to standard output.
+Implement using finite-state machine (FSM).
+
+## SUPPORTED TYPE OF COMMENTS
+This command recognizes following type of comments.
+```cpp
+/* C-Style Comments */
+```
+
+## BUILD
+Just run `make`.
+```bash
+$ make
+```
+
+## EXAMPLE
 Issue a command like this:
 ```bash
-cat some.c | rmcmt > comment_removed.c
+$ cat a.c | rmcmt > comment_removed.c
 ```
