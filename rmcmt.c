@@ -30,13 +30,13 @@ If not, see <https://www.gnu.org/licenses/>.
 state-transition table:
 
       event
-state e0  e1  e2  e3 eOTHER   eEOF
+state e0  e1  e2  e3  eOTHER  eEOF
 s0     -   -   -       -      -
-s1    s2  s1  s5  s5  s1   send
-s2    s1  s3  s5  s5  s1   send
-s3    s3  s4  s3  s3  s3  serr1
-s4    s1  s3  s3  s3  s3  serr1
-s5    s5  s5  s1  s1  s5  serr2
+s1    s2  s1  s5  s5  s1      send
+s2    s1  s3  s5  s5  s1      send
+s3    s3  s4  s3  s3  s3      serr1
+s4    s1  s3  s3  s3  s3      serr1
+s5    s5  s5  s1  s1  s5      serr2
 send   -   -   -   -   -      -
 serr1  -   -   -   -   -      -
 serr2  -   -   -   -   -      -
@@ -44,12 +44,12 @@ serr2  -   -   -   -   -      -
 state:
 s0 .. initial state (moving to s1 right now)
 s1 .. normal
-s2 .. '/' typed and waiting for '*'
+s2 .. '/' typed and expecting that the next is '*'
 s3 .. being in comment
-s4 .. '*' typed and waiting for '/'
+s4 .. '*' typed and expecting that the next is '/'
 s5 .. being in string
 send .. success end
-serr1 .. failure end (no "* /" detected)
+serr1 .. failure end (no "*""/" detected)
 serr2 .. failure end (no '"' detected)
 
 event:
@@ -165,7 +165,7 @@ int s3tos4(int c)
 int s3toserr1(int c)
 {
   // assert(c == EOF);
-  fprintf(stderr, "rmcmt : error : no \"*/\" detected.\n");
+  fprintf(stderr, "rmcmt : error : no 2nd \"*/\" detected.\n");
   exit(1);
 }
 
@@ -185,7 +185,7 @@ int s4tos3(int c)
 int s4toserr1(int c)
 {
   // assert(c == EOF);
-  fprintf(stderr, "rmcmt : error : no \"*/\" detected.\n");
+  fprintf(stderr, "rmcmt : error : no 2nd \"*/\" detected.\n");
   exit(1);
 }
 
@@ -206,7 +206,7 @@ int s5tos5(int c)
 int s5toserr2(int c)
 {
   // assert(c == EOF);
-  fprintf(stderr, "rmcmt : error : no '\"' detected.\n");
+  fprintf(stderr, "rmcmt : error : no 2nd double-quotation detected.\n");
   exit(1);
 }
 
