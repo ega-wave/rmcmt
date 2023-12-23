@@ -11,7 +11,7 @@ Read from standard input, and write to standard output.
 Implement using finite-state machine (FSM).
 
 ## SUPPORTED TYPE OF COMMENTS
-rmcmt_slaster recognizes following type of comments. The suffix "_slaster" stands for "slash + "asterisk".
+rmcmt_slaster recognizes following type of comments. The suffix "_slaster" stands for "slash" + "asterisk".
 ```cpp
 /* C-Style Comments */
 ```
