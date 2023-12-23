@@ -28,6 +28,9 @@ rmcmt : rmcmt.c
 rmcmt_slaster : rmcmt_slaster.c
 	gcc rmcmt_slaster.c -o rmcmt_slaster
 
+test :
+	bash test.bash
+
 clean:
 	rm rmcmt rmcmt_slaster
 
