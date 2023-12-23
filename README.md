@@ -2,7 +2,7 @@
 
 ## SYNOPSIS
 ```bash
-rmcmt  # no options, no args
+rmcmt_slaster  # no options, no args
 ```
 
 ## DESCRIPTION
@@ -11,7 +11,7 @@ Read from standard input, and write to standard output.
 Implement using finite-state machine (FSM).
 
 ## SUPPORTED TYPE OF COMMENTS
-This command recognizes following type of comments.
+rmcmt_slaster recognizes following type of comments. The suffix "_slaster" stands for "slash + "asterisk".
 ```cpp
 /* C-Style Comments */
 ```
