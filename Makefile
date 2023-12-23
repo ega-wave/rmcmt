@@ -20,11 +20,14 @@
 # Written by Yoshitaka Egawa.
 #
 
-all: rmcmt
+all: rmcmt rmcmt_slaster
 
 rmcmt : rmcmt.c
 	gcc rmcmt.c -o rmcmt
 
+rmcmt_slaster : rmcmt_slaster.c
+	gcc rmcmt_slaster.c -o rmcmt_slaster
+
 clean:
-	rm rmcmt
+	rm rmcmt rmcmt_slaster
 
