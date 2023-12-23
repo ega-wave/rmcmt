@@ -22,8 +22,14 @@ Just run `make`.
 $ make
 ```
 
+## TEST
+run `make` with argument "test".
+```bash
+$ make test
+```
+
 ## EXAMPLE
 Issue a command like this:
 ```bash
-$ cat a.c | rmcmt > comment_removed.c
+$ cat a.c | ./rmcmt > comment_removed.c
 ```
