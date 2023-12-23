@@ -20,7 +20,7 @@
 # Written by Yoshitaka Egawa.
 #
 
-all: rmcmt rmcmt_slaster
+all: rmcmt rmcmt_slaster rmcmt_dslash
 
 rmcmt : rmcmt.c
 	gcc rmcmt.c -o rmcmt
@@ -28,9 +28,12 @@ rmcmt : rmcmt.c
 rmcmt_slaster : rmcmt_slaster.c
 	gcc rmcmt_slaster.c -o rmcmt_slaster
 
+rmcmt_dslash : rmcmt_dslash.c
+	gcc rmcmt_dslash.c -o rmcmt_dslash
+
 test :
 	bash test.bash
 
 clean:
-	rm rmcmt rmcmt_slaster
+	rm rmcmt rmcmt_slaster rmcmt_dslash
 
