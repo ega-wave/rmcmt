@@ -33,7 +33,7 @@ state-transition table:
 state e0  e1  eOTHER  eEOF
 s0     -   -   -      -
 s1    s2  s1  s1      send
-s2    s1  s3  s1      send
+s2    s2  s3  s1      send
 s3    s3  s4  s3      serr1
 s4    s1  s4  s3      serr1
 send   -   -   -      -
@@ -83,6 +83,14 @@ void write_all_in_q()
   q_idx = 0;
 }
 
+void flushq()
+{
+  for (int idx = 0; idx < q_idx; idx++) {
+    fputc(q[idx], stdout);
+  }
+  q_idx = 0;
+}
+
 /**
  * state transition functions
  */
@@ -98,6 +106,7 @@ int s1tos1(int c)
 int s1tos2(int c)
 {
   // assert(c == '/');
+  flushq();
   enq(c);
   return S2;
 }
@@ -114,6 +123,14 @@ int s2tos1(int c)
   write_all_in_q();
   fputc((unsigned char)(c&0xFF), stdout);
   return S1;
+}
+
+int s2tos2(int c)
+{
+  // assert(c == '/');
+  flushq();
+  enq(c);
+  return S2;
 }
 
 int s2tos3(int c)
@@ -174,7 +191,7 @@ sttf table[5][4] = {
 /*            '/',    '*',  OTHER,       EOF */
 /* s0 */  {  NULL,   NULL,   NULL,      NULL }
 /* s1 */ ,{s1tos2, s1tos1, s1tos1,  s1tosend }
-/* s2 */ ,{s2tos1, s2tos3, s2tos1,  s2tosend }
+/* s2 */ ,{s2tos2, s2tos3, s2tos1,  s2tosend }
 /* s3 */ ,{s3tos3, s3tos4, s3tos3, serr1 }
 /* s4 */ ,{s4tos1, s4tos4, s4tos3, serr1 }
 };
