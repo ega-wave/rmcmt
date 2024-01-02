@@ -1,5 +1,5 @@
 /**
-rmcmt_slaster.c -- remove "/""**""/" comments
+rmcmt_slaster.c -- remove "/** /" comments
 
 Copyright (C) 2023 Yoshitaka Egawa.
 
@@ -38,7 +38,6 @@ s3    s3  s4  s3      serr1
 s4    s1  s4  s3      serr1
 send   -   -   -      -
 serr1  -   -   -      -
-serr2  -   -   -      -
 
 state:
 s0 .. initial state (moving to s1 right now)
@@ -47,7 +46,7 @@ s2 .. '/' typed and expecting that the next is '*'
 s3 .. being in comment
 s4 .. '*' typed and expecting that the next is '/'
 send .. end successfully
-serr1 .. end with fail (no "*""/" detected)
+serr1 .. end with fail (no "* /" detected)
 
 event:
 e0 .. '/' typed
@@ -57,8 +56,8 @@ eEOF .. EOF
 
 */
 
-enum { S0, S1, S2, S3, S4, S5, SEND, SERR1, SERR2 };
-enum { E0, E1, E2, EOTHER, EEOF };
+enum { S0, S1, S2, S3, S4, SEND, SERR1 };
+enum { E0, E1, EOTHER, EEOF };
 
 /**
  * queue
@@ -145,7 +144,7 @@ int s3tos4(int c)
 int s3toserr1(int c)
 {
   // assert(c == EOF);
-  fprintf(stderr, "rmcmt : error : no 2nd '*''/' detected.\n");
+  fprintf(stderr, "rmcmt : error : reach at EOF with no '* /' detected.\n");
   exit(1);
 }
 
@@ -172,7 +171,7 @@ int s4tos4(int c)
 int s4toserr1(int c)
 {
   // assert(c == EOF);
-  fprintf(stderr, "rmcmt : error : no 2nd '*''/' detected.\n");
+  fprintf(stderr, "rmcmt : error : reach at EOF with no '* /' detected.\n");
   exit(1);
 }
 

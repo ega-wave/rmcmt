@@ -1,5 +1,5 @@
 
-function assert_equal() {
+function assert_equal_slaster() {
   set -f
   echo $1 | ./rmcmt_slaster 2>/dev/null >/dev/null ; status=$?
   set +f
@@ -9,11 +9,11 @@ function assert_equal() {
   fi
 }
 
-assert_equal '' 0
-assert_equal '/' 0
-assert_equal '/*' 1
-assert_equal '/* ' 1
-assert_equal '/* /' 1
-assert_equal '/* *' 1
-assert_equal '/* */' 0
+assert_equal_slaster '' 0
+assert_equal_slaster '/' 0
+assert_equal_slaster '/*' 1
+assert_equal_slaster '/* ' 1
+assert_equal_slaster '/* /' 1
+assert_equal_slaster '/* *' 1
+assert_equal_slaster '/* */' 0
 
