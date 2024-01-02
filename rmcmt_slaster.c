@@ -141,13 +141,6 @@ int s3tos4(int c)
   return S4;
 }
 
-int s3toserr1(int c)
-{
-  // assert(c == EOF);
-  fprintf(stderr, "rmcmt : error : reach at EOF with no '* /' detected.\n");
-  exit(1);
-}
-
 int s4tos1(int c)
 {
   // assert(c == '/');
@@ -168,7 +161,7 @@ int s4tos4(int c)
   return S4;
 }
 
-int s4toserr1(int c)
+int serr1(int c)
 {
   // assert(c == EOF);
   fprintf(stderr, "rmcmt : error : reach at EOF with no '* /' detected.\n");
@@ -182,8 +175,8 @@ sttf table[5][4] = {
 /* s0 */  {  NULL,   NULL,   NULL,      NULL }
 /* s1 */ ,{s1tos2, s1tos1, s1tos1,  s1tosend }
 /* s2 */ ,{s2tos1, s2tos3, s2tos1,  s2tosend }
-/* s3 */ ,{s3tos3, s3tos4, s3tos3, s3toserr1 }
-/* s4 */ ,{s4tos1, s4tos4, s4tos3, s4toserr1 }
+/* s3 */ ,{s3tos3, s3tos4, s3tos3, serr1 }
+/* s4 */ ,{s4tos1, s4tos4, s4tos3, serr1 }
 };
 
 int change_state(int s, int c)
