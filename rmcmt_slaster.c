@@ -115,6 +115,7 @@ int s2tos3(int c)
   // assert(c == '*');
   deq();
   enq(' ');
+  flushq();
   return S3;
 }
 
