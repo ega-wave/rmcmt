@@ -124,11 +124,6 @@ int s3tos3(int c)
   return S3;
 }
 
-int s3tos4(int c)
-{
-  return S4;
-}
-
 int s4tos1(int c)
 {
   // assert(c == '/');
@@ -141,19 +136,18 @@ int s4tos3(int c)
   return S3;
 }
 
-int s4tos4(int c)
-{
-  // assert(c == '*');
-  write_all_in_q();
-  return S4;
-}
-
 int tos2(int c)
 {
   // assert(c == '/');
   flushq();
   enq(c);
   return S2;
+}
+
+int tos4(int c)
+{
+  // assert(c == '*');
+  return S4;
 }
 
 int send(int c)
@@ -177,8 +171,8 @@ sttf table[5][4] = {
 /* s0 */  {  NULL,   NULL,   NULL,  NULL }
 /* s1 */ ,{  tos2, s1tos1, s1tos1,  send }
 /* s2 */ ,{  tos2, s2tos3, s2tos1,  send }
-/* s3 */ ,{s3tos3, s3tos4, s3tos3, serr1 }
-/* s4 */ ,{s4tos1, s4tos4, s4tos3, serr1 }
+/* s3 */ ,{s3tos3,   tos4, s3tos3, serr1 }
+/* s4 */ ,{s4tos1,   tos4, s4tos3, serr1 }
 };
 
 int change_state(int s, int c)
