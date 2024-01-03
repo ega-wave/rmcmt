@@ -112,12 +112,6 @@ int s1tos2(int c)
   return S2;
 }
 
-int s1tosend(int c)
-{
-  // assert(c == EOF);
-  return SEND;
-}
-
 int s2tos1(int c)
 {
   // assert(c == '/' || c == other);
@@ -140,13 +134,6 @@ int s2tos3(int c)
   deq();
   enq(' ');
   return S3;
-}
-
-int s2tosend(int c)
-{
-  // assert(c == EOF);
-  write_all_in_q();
-  return SEND;
 }
 
 int s3tos3(int c)
@@ -179,6 +166,13 @@ int s4tos4(int c)
   return S4;
 }
 
+int send(int c)
+{
+  // assert(c == EOF);
+  flushq();
+  return SEND;
+}
+
 int serr1(int c)
 {
   // assert(c == EOF);
@@ -189,10 +183,10 @@ int serr1(int c)
 typedef int (*sttf)(int);
 
 sttf table[5][4] = {
-/*            '/',    '*',  OTHER,       EOF */
-/* s0 */  {  NULL,   NULL,   NULL,      NULL }
-/* s1 */ ,{s1tos2, s1tos1, s1tos1,  s1tosend }
-/* s2 */ ,{s2tos2, s2tos3, s2tos1,  s2tosend }
+/*            '/',    '*',  OTHER,   EOF */
+/* s0 */  {  NULL,   NULL,   NULL,  NULL }
+/* s1 */ ,{s1tos2, s1tos1, s1tos1,  send }
+/* s2 */ ,{s2tos2, s2tos3, s2tos1,  send }
 /* s3 */ ,{s3tos3, s3tos4, s3tos3, serr1 }
 /* s4 */ ,{s4tos1, s4tos4, s4tos3, serr1 }
 };
