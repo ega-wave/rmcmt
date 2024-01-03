@@ -106,10 +106,8 @@ int s1tos1(int c)
 
 int s2tos1(int c)
 {
-  // assert(c == '/' || c == other);
-  write_all_in_q();
-  fputc((unsigned char)(c&0xFF), stdout);
-  return S1;
+  // assert(c != '/' && c != '*');
+  return s1tos1(c);
 }
 
 int s2tos3(int c)
@@ -133,7 +131,6 @@ int s3tos4(int c)
 int s4tos1(int c)
 {
   // assert(c == '/');
-  write_all_in_q();
   return S1;
 }
 
