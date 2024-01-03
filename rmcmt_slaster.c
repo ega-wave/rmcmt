@@ -98,8 +98,9 @@ void flushq()
 
 int s1tos1(int c)
 {
-  // assert(c == '*' || c == other);
-  fputc((unsigned char)(c&0xFF), stdout);
+  // assert(c != '/');
+  enq(c);
+  flushq();
   return S1;
 }
 
