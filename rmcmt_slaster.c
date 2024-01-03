@@ -75,14 +75,6 @@ void deq()
   q_idx--;
 }
 
-void write_all_in_q()
-{
-  for (int idx = 0; idx < q_idx; idx++) {
-    fputc(q[idx], stdout);
-  }
-  q_idx = 0;
-}
-
 void flushq()
 {
   for (int idx = 0; idx < q_idx; idx++) {
