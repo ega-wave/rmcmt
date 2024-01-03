@@ -104,28 +104,12 @@ int s1tos1(int c)
   return S1;
 }
 
-int s1tos2(int c)
-{
-  // assert(c == '/');
-  flushq();
-  enq(c);
-  return S2;
-}
-
 int s2tos1(int c)
 {
   // assert(c == '/' || c == other);
   write_all_in_q();
   fputc((unsigned char)(c&0xFF), stdout);
   return S1;
-}
-
-int s2tos2(int c)
-{
-  // assert(c == '/');
-  flushq();
-  enq(c);
-  return S2;
 }
 
 int s2tos3(int c)
@@ -166,6 +150,14 @@ int s4tos4(int c)
   return S4;
 }
 
+int tos2(int c)
+{
+  // assert(c == '/');
+  flushq();
+  enq(c);
+  return S2;
+}
+
 int send(int c)
 {
   // assert(c == EOF);
@@ -185,8 +177,8 @@ typedef int (*sttf)(int);
 sttf table[5][4] = {
 /*            '/',    '*',  OTHER,   EOF */
 /* s0 */  {  NULL,   NULL,   NULL,  NULL }
-/* s1 */ ,{s1tos2, s1tos1, s1tos1,  send }
-/* s2 */ ,{s2tos2, s2tos3, s2tos1,  send }
+/* s1 */ ,{  tos2, s1tos1, s1tos1,  send }
+/* s2 */ ,{  tos2, s2tos3, s2tos1,  send }
 /* s3 */ ,{s3tos3, s3tos4, s3tos3, serr1 }
 /* s4 */ ,{s4tos1, s4tos4, s4tos3, serr1 }
 };
